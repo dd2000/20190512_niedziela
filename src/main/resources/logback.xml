@@ -1,0 +1,27 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{YYYY-dd-MM HH:mm:ss.SSS} %-5level [%thread] %logger[%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE_Y" class="ch.qos.logback.core.FileAppender">
+        <file>C:\myspace\sda_workspace\log_y.txt</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <encoder>
+            <pattern>%date %level %file %logger[%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+    <logger name="pl.sda.logging.systemX" level="DEBUG" />
+
+    <logger name="pl.sda.logging.systemY" level="DEBUG" additivity="true">
+        <appender-ref ref="FILE_Y"/>
+    </logger>
+</configuration>

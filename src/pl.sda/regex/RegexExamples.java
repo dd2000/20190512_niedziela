@@ -6,7 +6,23 @@ import java.util.regex.Pattern;
 public class RegexExamples {
     public static void main(String[] args) {
         String text1 = "abc 123 def";
+
+        // nie mamy dopasowania do calego wzorca, kazde `matcher.find` znajduje kolejna grupe w tekscie
         Pattern pattern = Pattern.compile("([a-z0-9]+)");
+        Matcher matcher = pattern.matcher(text1);
+        while (matcher.find()) {
+            System.out.println(matcher.group());
+        }
+
+        // mamy dopasowanie do calego wzorca, a poszczegolne grupy, ktore zdefiniowalismy w naszym wyrazeniu regularnym dostepne sa `od razu`
+        // wykonujemy `matcher.find` raz i mamy dostep do wszystkich znalezionych grup
+//        Pattern pattern = Pattern.compile("([a-z]+)\\s([0-9]+)\\s([a-z]+)");
+//        Matcher matcher = pattern.matcher(text1);
+//        System.out.println("Groups -> " + matcher.groupCount());
+//        matcher.find();
+//        for (int i = 1; i <= matcher.groupCount(); i++) {
+//            System.out.println(matcher.group(i));
+//        }
 
         // regex for the whole text provided
 //        Pattern pattern = Pattern.compile("([a-z0-9\\s]+)");

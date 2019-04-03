@@ -29,7 +29,7 @@ public class RegexExamples {
 
 //        Pattern pattern = Pattern.compile("\\d+");
 //        Pattern pattern = Pattern.compile("[0-9]+");
-        Matcher matcher = pattern.matcher(text1);
+//        Matcher matcher = pattern.matcher(text1);
 
         System.out.println("Matcher.matches > " + matcher.matches());
 

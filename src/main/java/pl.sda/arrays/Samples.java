@@ -208,7 +208,7 @@ public class Samples {
 
         //sortowanie w porządku odwrotnym
         Arrays.sort(persons, Comparator.reverseOrder());
-        System.out.println("persons sorted by age reversed = " + Arrays.toString(persons));
+        System.out.println("persons sorted reversed = " + Arrays.toString(persons));
 
         //sortowanie w porządku zdefiniowanym
         Arrays.sort(persons, new PersonByAgeComparator());

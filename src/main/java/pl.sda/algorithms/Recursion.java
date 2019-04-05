@@ -11,6 +11,7 @@ public class Recursion {
         }
         return start + sum(start + 1, end);
 
+        // sum(1, 10)
         // 1 + sum(2, 10)
         //  2 + sum(3, 10)
         //   3 + sum(4, 10)

@@ -68,6 +68,11 @@ public class GuavaSamples {
         uppers.add("C");
         uppers.add("D");
         mapOfStrings.put("upper", uppers);
+        if(!mapOfStrings.containsKey("middle")) {
+            mapOfStrings.put("middle", new HashSet<>());
+        }
+        Set<String> middle = mapOfStrings.get("middle");
+        middle.add("u");
 
         System.out.println("mapOfStrings size = " + mapOfStrings.size());
         System.out.println("mapOfStrings values = " + mapOfStrings.values());
@@ -79,6 +84,8 @@ public class GuavaSamples {
         guavaMapOfStrings.put("lower", "b");
         guavaMapOfStrings.put("lower", "c");
         guavaMapOfStrings.put("lower", "d");
+        Collection<String> lower = guavaMapOfStrings.get("lower");
+        System.out.println("lower = " + lower);
 
         guavaMapOfStrings.put("upper", "A");
         guavaMapOfStrings.put("upper", "B");

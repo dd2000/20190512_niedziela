@@ -1,5 +1,6 @@
 package pl.sda.arrays;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Tasks {
@@ -52,20 +53,48 @@ public class Tasks {
      * Następnie wypisz na ekran wszystkie stringi które zaczynają się na literę 'a'.
      */
     private static void arraysOfStrings() {
+        String[] tablica = new String[6];
+        tablica[0] = "Ola";
+        tablica[1] = "Asia";
+        tablica[2] = "Bartek";
+        tablica[3] = "Ela";
+        tablica[4] = "Aneta";
+        tablica[5] = "Kasia";
+
+        String[] tablica2 = new String[]{"Ola", "Asia", "Bartek", "Ela", "Gosia"};
+        System.out.println(tablica[0] + "+" + tablica[tablica.length - 1]);
+        System.out.println(Arrays.toString(tablica));
+
+        for (String name : tablica) {
+            if (name.startsWith("A"))
+                System.out.println(name);
+        }
     }
 
     /**
      * 2. Napisz metodę która odwróci kolejność występowania wyrazów w podanej tablicy
      */
     private static String[] reverse(String[] words) {
-        return null;
+        String[] reversedWords = new String[words.length];
+        for (int i = 0; i < words.length; i++) {
+            reversedWords[i] = words[words.length - 1 - i];
+        }
+        return reversedWords;
     }
 
     /**
      * 3. Znajdź najmniejszą wartość w tablicy, zwróć ją jako wynik metody
      */
     private static double findMin(double[] numbers) {
-        return 0;
+        if (numbers == null || numbers.length == 0) {
+            throw new IllegalArgumentException();
+        }
+        double min = numbers[0];
+        for (int i = 1; i < numbers.length; i++) {
+            if (numbers[i] < min) min = numbers[i];
+        }
+        return min;
+
     }
 
     /**
@@ -92,7 +121,7 @@ public class Tasks {
 
     /**
      * 6. Dodaj do klasy Car możliwość sortowanie w porządku naturalnym (najpierw po marce, potem po roku produkcji).
-     *    Następnie posortuj tablicę obiektów Car w porządku naturalnym i ją zwróć
+     * Następnie posortuj tablicę obiektów Car w porządku naturalnym i ją zwróć
      */
     private static Car[] sortCars(Car[] cars) {
         return null;

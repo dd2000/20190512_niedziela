@@ -1,5 +1,9 @@
 package pl.sda.list;
 
+import com.google.common.collect.Lists;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Tasks {
@@ -13,7 +17,7 @@ public class Tasks {
         //List<String> list2 = Lists.newArrayList("orange", "pear");
         //List<String> list3 = Lists.newArrayList("lemon", "peach", "cherry", "apple");
         //List<String> fruits = merge(list1, list2, list3);
-        //System.out.println("fruits = " + fruits);
+        //System.   out.println("fruits = " + fruits);
 
         //#3
         //List<Double> numbers = Lists.newArrayList(3.5, 0.5, 3.1, 7., 0.9);
@@ -42,15 +46,36 @@ public class Tasks {
     }
 
     /**
-     * 1. Stwórz listę obiektów typu Integer. Wypisz na ekran pierwszy, środokowy i ostatni element listy.
+     * 1. Stwórz listę obiektów typu Integer. Wypisz na ekran pierwszy, środkowy i ostatni element listy.
      * Następnie wypisz na ekran co drugą liczbę z listy.
      */
     private static void listOfIntegers() {
+        List<Integer> cities = new ArrayList<>();
+        cities.add(1);
+        cities.add(2);
+        cities.add(3);
+        cities.add(4);
+        cities.add(5);
+
+        List<Integer> cities2 = Lists.newArrayList(11, 12, 13, 14, 15);
+
+        //  List<Integer> cities2 = Arrays.asList(5,6,7,8,9);
+        //cities2.add(8);
+        int first = cities2.get(0);
+        int middleIndex = (cities2.size() / 2) - 1;
+        if (cities2.size() %2 !=0) {
+            middleIndex++;
+        }
+        int last = cities2.get(cities2.size()-1);
+        int middle = cities2.get(middleIndex);
+        System.out.println(first);
+        System.out.println(middle);
+        System.out.println(last);
     }
 
     /**
      * 2. Napisz metodę która połączy wszystkie element 3 list w jedną listę, która ma być zwrócona z metody.
-     *    Zwrócona lista nie powinna zawierać duplikatów.
+     * Zwrócona lista nie powinna zawierać duplikatów.
      */
     private static List<String> merge(List<String> list1, List<String> list2, List<String> list3) {
         return null;

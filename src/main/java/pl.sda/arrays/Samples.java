@@ -23,7 +23,7 @@ public class Samples {
 
         //#5
         //sortowanie elementów tablicy
-        //arraysSorting();
+        arraysSorting();
 
         //#6
         //użycie tablic jako źródła dla streamów

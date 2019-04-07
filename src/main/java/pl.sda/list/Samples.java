@@ -9,11 +9,11 @@ public class Samples {
     public static void main(String[] args) {
         //#1
         //deklaracja, inicjalizacja i podstawowe operacje na listach
-        listBasics();
+        //listBasics();
 
         //#2
         //użycie klasy Collections
-        //collectionsUtils();
+        collectionsUtils();
 
         //#3
         //sortowanie elementów listy
@@ -25,6 +25,12 @@ public class Samples {
     }
 
     private static void listBasics() {
+        //ku przestrodze usuwanie po indexie na liscie intow
+        ArrayList<Integer> integers = Lists.newArrayList(1, 2, 3);
+        Integer index1 = 1;
+        integers.remove(index1);
+        System.out.println(integers);
+
         //deklaracja listy stringów - ArrayList - jako parametr w konstruktorze można ustawić początkową wielkość tablicy
         List<String> colors = new ArrayList<>(10);
 

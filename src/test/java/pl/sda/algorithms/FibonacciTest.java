@@ -11,7 +11,7 @@ public class FibonacciTest {
         int[] result = new int[n];
 
         // when
-        // TODO
+        Fibonacci.fibRec(result, n);
 
         // then
         // #1
@@ -30,7 +30,7 @@ public class FibonacciTest {
         int n = 4;
 
         // when
-        int result = 0; // TODO
+        int result = Fibonacci.fibonacci(n);
 
         // then
         Assertions.assertEquals(2, result);

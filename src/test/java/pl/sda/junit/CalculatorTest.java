@@ -18,6 +18,19 @@ public class CalculatorTest {
     }
 
     @Test
+    public void shouldDivideNumbers() {
+        // given
+        int a = 10;
+        int b = 2;
+
+        // when
+        int result = Calculator.divide(a, b);
+
+        // then
+        Assertions.assertEquals(5, result);
+    }
+
+    @Test
     public void shouldCheckArray() {
         // given
         int[] arr = new int[4];

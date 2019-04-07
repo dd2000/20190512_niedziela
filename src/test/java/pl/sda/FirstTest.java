@@ -8,4 +8,9 @@ public class FirstTest {
     public void shouldTwoEqualTwo() {
        Assertions.assertEquals(2, 2);
     }
+
+    @Test
+    public void shouldThreeEqualsThree() {
+        Assertions.assertEquals(3, 3);
+    }
 }

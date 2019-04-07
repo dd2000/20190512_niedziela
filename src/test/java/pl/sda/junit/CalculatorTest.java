@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class CalculatorTest {
     @Test
-    public void shouldComputeNumbers() {
+    public void shouldAddNumbers() {
         // given
         int a = 3;
         int b = 7;
@@ -15,5 +15,18 @@ public class CalculatorTest {
 
         // then
         Assertions.assertEquals(10, result);
+    }
+
+    @Test
+    public void shouldCheckArray() {
+        // given
+        int[] arr = new int[4];
+
+        // when
+
+        // then
+        Assertions.assertTrue(arr != null);
+        Assertions.assertTrue(arr.length > 0);
+        Assertions.assertEquals(0, arr[0]);
     }
 }

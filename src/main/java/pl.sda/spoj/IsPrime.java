@@ -2,6 +2,9 @@ package pl.sda.spoj;
 
 import java.util.Scanner;
 
+/**
+ * https://pl.spoj.com/problems/PRIME_T/
+ */
 public class IsPrime {
     public static void main (String[] args) throws java.lang.Exception {
         Scanner scanner = new Scanner(System.in);

@@ -7,13 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BooksManager {
+    private List<Book> books;
 
-    public List<Book> findBooks() {
-        return new ArrayList<>();
+    public BooksManager() {
+        books = createBooks();
     }
 
+    public List<Book> findBooks() {
+        return books;
+    }
 
     public void addBook(String author, String title, BookType type) {
+
     }
 
     public boolean deleteBook(int bookId) {

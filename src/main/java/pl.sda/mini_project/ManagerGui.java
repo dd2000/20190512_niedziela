@@ -1,6 +1,7 @@
 package pl.sda.mini_project;
 
 import com.google.common.collect.Lists;
+import com.google.common.primitives.Ints;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
 import org.beryx.textio.TextTerminal;
@@ -9,6 +10,8 @@ import pl.sda.mini_project.books.BookType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -37,8 +40,9 @@ public class ManagerGui {
             textTerminal.print(Lists.newArrayList(
                     "Menu:",
                     "1. Lista wszystkich książek",
-                    "2. Dodaj książkę",
-                    "3. Usuń książkę",
+                    "2. Lista wszystkich autorów",
+                    "3. Dodaj książkę",
+                    "4. Usuń książkę",
                     "0. Zakończ",
                     ""
             ));
@@ -54,9 +58,12 @@ public class ManagerGui {
                     printBooks();
                     break;
                 case 2:
-                    addBook();
+                    printAuthors();
                     break;
                 case 3:
+                    addBook();
+                    break;
+                case 4:
                     deleteBook();
                     break;
             }
@@ -68,12 +75,37 @@ public class ManagerGui {
         printList(books);
     }
 
+    private void printAuthors() {
+        Map<String, List<Book>> authorsBooks = booksManager.getAuthorsBooks();
+        printMap(authorsBooks);
+    }
+
     private void addBook() {
         TextTerminal<?> textTerminal = textIO.getTextTerminal();
         textTerminal.resetToBookmark(BEGIN_BOOKMARK);
 
+        Set<String> authors = booksManager.getAuthors();
+        if (authors != null && authors.size() > 0) {
+            int i = 1;
+            textIO.getTextTerminal().println("Aktualni autorzy (wybierz id lub dodaj nowego):");
+            for (String author : authors) {
+                textIO.getTextTerminal().println("  " + i + ": " + author);
+                i++;
+            }
+        }
+
         String author = textIO.newStringInputReader()
                 .read("Autor: ");
+        Integer authorId = Ints.tryParse(author);
+        if (authors != null && authorId != null) {
+            int i = 1;
+            for (String authorToAdd : authors) {
+                if (i == authorId) {
+                    author = authorToAdd;
+                }
+                i++;
+            }
+        }
         String title = textIO.newStringInputReader()
                 .read("Tytuł: ");
         BookType type = textIO.newEnumInputReader(BookType.class)
@@ -130,5 +162,38 @@ public class ManagerGui {
                 printList(books);
                 break;
         }
+    }
+
+    private void printMap(Map<String, List<Book>> authorsBooks) {
+        TextTerminal<?> textTerminal = textIO.getTextTerminal();
+        textTerminal.resetToBookmark(BEGIN_BOOKMARK);
+        List<String> messages = new ArrayList<>();
+        if (authorsBooks == null || authorsBooks.isEmpty()) {
+            messages.add("Brak autorów");
+        } else {
+            authorsBooks.forEach((author, books) -> {
+                messages.add(author);
+                for (int i = 0; i < books.size(); i++) {
+                    Book book = books.get(i);
+                    messages.add(String.format("  %d. %s [%s]", i + 1, book.getTitle(), book.getType()));
+                }
+            });
+        }
+
+        textTerminal.println();
+        textTerminal.print(messages);
+        textTerminal.println();
+        textTerminal.println();
+        textTerminal.print(Lists.newArrayList(
+                "Menu:",
+                "0. Wróć do głównego menu",
+                ""
+        ));
+        textTerminal.println();
+
+        textIO.newIntInputReader()
+                .withMinVal(0)
+                .withMaxVal(0)
+                .read("Twój wybór");
     }
 }

@@ -3,8 +3,7 @@ package pl.sda.mini_project;
 import pl.sda.mini_project.books.Book;
 import pl.sda.mini_project.books.BookType;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class BooksManager {
     private List<Book> books;
@@ -18,18 +17,39 @@ public class BooksManager {
     }
 
     public void addBook(String author, String title, BookType type) {
-
+        Book book = new Book(author, title, type);
+        books.add(book);
     }
 
     public boolean deleteBook(int bookId) {
+        for (int i = 0; i < books.size(); i++) {
+            Book book = books.get(i);
+            if (book.getId() == bookId) {
+                books.remove(book);
+                return true;
+            }
+        }
+
         return false;
     }
 
     public List<Book> getSortedByAuthor() {
-        return null;
+        List<Book> byAuthors = new ArrayList<>(books);
+        byAuthors.sort(Comparator.comparing(Book::getAuthor));
+        return byAuthors;
     }
 
     public List<Book> getSortedByType() {
+        List<Book> byTypes = new ArrayList<>(books);
+        byTypes.sort(Comparator.comparing(Book::getType).thenComparing(Book::getAuthor));
+        return byTypes;
+    }
+
+    public Set<String> getAuthors() {
+        return null;
+    }
+
+    public Map<String, List<Book>> getAuthorsBooks() {
         return null;
     }
 

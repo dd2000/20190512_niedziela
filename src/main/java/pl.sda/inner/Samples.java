@@ -4,6 +4,8 @@ import com.google.common.collect.Lists;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public class Samples {
     public static void main(String[] args) {
@@ -58,6 +60,24 @@ public class Samples {
         Comparator<Product> lambdaComparator2 = Samples::compare1;
         products.sort(lambdaComparator);
         System.out.println("products(lambdaComparator) = " + products);
+
+        Comparator<Product> lambdaComparator3 = (o1, o2) -> {
+            if(o1.getName().length() != o2.getName().length()) {
+                return o2.getName().length() - o1.getName().length();
+            }
+            return o1.getId() - o2.getId();
+        };
+        products.sort(lambdaComparator3);
+        System.out.println("products(lambdaComparator) = " + products);
+
+        Predicate<Product> predicate = product1 -> product1.getName().length() <= 4;
+        //products.removeIf(predicate);
+        Consumer<Product> consumer = product1 -> {
+            if(product1.getName().length() > 4) {
+                System.out.println(product1);
+            }
+        };
+        products.forEach(consumer);
     }
 
     public static int compare1(Product o1, Product o2) {

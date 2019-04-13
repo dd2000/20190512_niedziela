@@ -28,6 +28,7 @@ public class PersonThree implements Person {
     }
 
     //prawidłowa implementacja metod: equals() i hashCode()
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -41,7 +42,7 @@ public class PersonThree implements Person {
 
     @Override
     public int hashCode() {
-        int result = (name != null ? name.hashCode() : 0);
+        int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
         return result;
     }

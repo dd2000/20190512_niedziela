@@ -54,5 +54,13 @@ public class Samples {
         Comparator<Product> lambdaComparator = (o1, o2) -> o1.getName().compareTo(o2.getName());
         products.sort(lambdaComparator);
         System.out.println("products(lambdaComparator) = " + products);
+
+        Comparator<Product> lambdaComparator2 = Samples::compare1;
+        products.sort(lambdaComparator);
+        System.out.println("products(lambdaComparator) = " + products);
+    }
+
+    public static int compare1(Product o1, Product o2) {
+        return o1.getName().compareTo(o2.getName());
     }
 }

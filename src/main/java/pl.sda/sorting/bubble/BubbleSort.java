@@ -1,37 +1,36 @@
 package pl.sda.sorting.bubble;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class BubbleSort {
-    public static void main(String[] args) {
-        int[] table = randomTable(10, 10, 100);
+    public static void main(String[] args) throws Exception {
+        int[] table = randomTable(100000, 1, 1000);
 //        System.out.println(Arrays.toString(table));
         long start = System.currentTimeMillis();
-        sort(table, true);
+        sort(table);
         long end = System.currentTimeMillis();
-        System.out.println(Arrays.toString(table));
+//        System.out.println(Arrays.toString(table));
         System.out.println(end - start + "ms");
     }
 
-    public static void sort(int[] table, boolean ascending) {
-        int n = table.length;
-        for (int i = 0; i < n; i++) {
-            int count = 0;
-            for (int k = 0; k < n - i - 1; k++) {
-                if (ascending && table[k] > table[k + 1]) {
-                    swap(table, k);
-                    count++;
-                }
-                if (!ascending && table[k] < table[k + 1]) {
-                    swap(table, k);
-                    count++;
-                }
-            }
-            if (count == 0) {
-                break;
-            }
+    public static void sort(int[] tab) throws TableIsNullException {
+        if (tab == null) {
+            throw new TableIsNullException();
         }
+        int n = tab.length;
+        long count = 0;
+        do {
+            int newn = 0;
+            for (int i = 0; i < n - 1; i++) {
+                if (tab[i] > tab[i + 1]) {
+                    swap(tab, i);
+                    count++;
+                    newn = i + 1;
+                }
+            }
+            n = newn;
+        } while (n >= 1);
+        System.out.println(count);
     }
 
     private static void swap(int[] tab, int i) {

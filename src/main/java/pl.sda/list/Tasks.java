@@ -2,9 +2,7 @@ package pl.sda.list;
 
 import com.google.common.collect.Lists;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Tasks {
 
@@ -59,7 +57,7 @@ public class Tasks {
 
         List<Integer> cities2 = Lists.newArrayList(11, 12, 13, 14, 15);
 
-        //  List<Integer> cities2 = Arrays.asList(5,6,7,8,9);
+        //List<Integer> cities2 = Arrays.asList(5,6,7,8,9);
         //cities2.add(8);
         int first = cities2.get(0);
         int middleIndex = (cities2.size() / 2) - 1;
@@ -78,20 +76,58 @@ public class Tasks {
      * Zwrócona lista nie powinna zawierać duplikatów.
      */
     private static List<String> merge(List<String> list1, List<String> list2, List<String> list3) {
-        return null;
+        List<String> result = new ArrayList<>(list1);
+
+        list2.removeAll(result);
+        result.addAll(list2);
+
+        list3.removeAll(result);
+        result.addAll(list3);
+
+        return result;
     }
 
     /**
      * 3. Posortuj podane liczby bez użycia metod z klasy Collection - za pomocą algorytmu sortowanie przez wybieranie
      */
     private static List<Double> selectionSort(List<Double> numbers) {
-        return null;
+        List<Double> result = new ArrayList<>(numbers);
+
+        for (int i = 0; i < result.size(); i++) {
+            for (int j = i + 1; j < result.size(); j++) {
+                if(result.get(i) > result.get(j)) {
+                    double tmp = result.get(i);
+                    result.set(i, result.get(j));
+                    result.set(j, tmp);
+                }
+            }
+        }
+
+        return result;
     }
 
     /**
      * 4. Napisz metodę, która wyszuka podany element w liście i zwróci true jeżęli element zostanie znaleziony, false - w przeciwnym przypadku
      */
     private static boolean binarySearch(List<String> strings, String searchedPhrase) {
+        //wyszukiwanie binarne działa tylko na posortowanych kolekcjach
+        Collections.sort(strings);
+
+        int start = 0;
+        int end = strings.size() - 1;
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+
+            String midElement = strings.get(mid);
+            if(midElement.equals(searchedPhrase)) {
+                return true;
+            } else if (midElement.compareTo(searchedPhrase) > 0) {
+                end = mid - 1;
+            } else if (midElement.compareTo(searchedPhrase) < 0) {
+                start = mid + 1;
+            }
+        }
+
         return false;
     }
 
@@ -99,6 +135,8 @@ public class Tasks {
      * 5*. Posortuje listę produktów po cenie rosnąco i po nazwie rosnąco. Zwróć posortowaną listę.
      */
     private static List<Product> sortProducts(List<Product> products) {
-        return null;
+        List<Product> sorted = new ArrayList<>(products);
+        Collections.sort(sorted, Comparator.comparing(Product::getPrice).thenComparing(Product::getName));
+        return sorted;
     }
 }

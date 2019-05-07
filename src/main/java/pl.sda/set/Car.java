@@ -1,36 +1,26 @@
 package pl.sda.set;
 
 public class Car {
-    private String brand;
-    private String color;
     private String vin;
+    private String model;
+    private int yearOfProduction;
 
-    public Car(String brand, String color, String vin) {
-        this.brand = brand;
-        this.color = color;
+    public Car(String vin, String model, int yearOfProduction) {
         this.vin = vin;
-    }
-
-    public String getBrand() {
-        return brand;
-
-    }
-
-    public String getColor() {
-        return color;
+        this.model = model;
+        this.yearOfProduction = yearOfProduction;
     }
 
     public String getVin() {
         return vin;
     }
 
-    @Override
-    public String toString() {
-        return "Car{" +
-                "brand='" + brand + '\'' +
-                ", color='" + color + '\'' +
-                ", vin='" + vin + '\'' +
-                '}';
+    public String getModel() {
+        return model;
+    }
+
+    public int getYearOfProduction() {
+        return yearOfProduction;
     }
 
     @Override
@@ -46,5 +36,10 @@ public class Car {
     @Override
     public int hashCode() {
         return vin != null ? vin.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s %d (vin:%s)", model, yearOfProduction, vin);
     }
 }

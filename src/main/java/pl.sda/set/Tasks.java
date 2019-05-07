@@ -9,22 +9,18 @@ public class Tasks {
         Citizen citizen1 = new Citizen("Jan", "Kowalski", "850223000000");
         Citizen citizen2 = new Citizen("Jan", "Kowalski", "891213000000");
         Citizen citizen3 = new Citizen("Jan", "Kowalski", "850223000000");
-        //setOfCitizens(citizen1, citizen2, citizen3);
+        setOfCitizens(citizen1, citizen2, citizen3);
 
         //#2
-        Car car1 = new Car("toyota", "red", "1234");
-        Car car2 = new Car("toyota", "red", "1234");
-        Car car3 = new Car("toyota", "red", "1456");
-
-        //setOfCars(car1, car2, car3);
+        //setOfCars();
 
         //#3
-        NavigableSet<Citizen> citizens = treeSetOfCitizens(new Citizen("Maria", "Bobek", "1"), new Citizen("Adam", "Nowak", "2"),
+        /*NavigableSet<Citizen> citizens = treeSetOfCitizens(new Citizen("Maria", "Bobek", "1"), new Citizen("Adam", "Nowak", "2"),
                 new Citizen("Jan", "Kowalski", "3"), new Citizen("Anna", "Kowalska", "4"),
                 new Citizen("Mirek", "Nowak", "5"), new Citizen("Edward", "Kania", "6"),
                 new Citizen("Zenon", "Jeleń", "7"), new Citizen("Zuzanna", "Lazur", "8")
         );
-        citizens.forEach(System.out::println);
+        citizens.forEach(System.out::println);*/
 
         //#4
         /*Set<String> names = citizens.stream()
@@ -39,9 +35,10 @@ public class Tasks {
      *    Dodaj do kolekcji obiekty przekazane w metodzie i wypisz zawartość set-a na ekran.
      */
     private static void setOfCitizens(Citizen... citizens) {
-        Set<Citizen> citizenSet = new HashSet<>();
-        citizenSet.addAll(Arrays.asList(citizens));
+        List<Citizen> citizenList = Arrays.asList(citizens);
+        Set<Citizen> citizensSet = new HashSet<>(citizenList);
 
+        System.out.println("citizensSet = " + citizensSet);
     }
 
     /**
@@ -49,11 +46,17 @@ public class Tasks {
      * Dodaj metody: equals(), hashCode() - zastanów się jakie pole może posłużyć do sprawdzenia czy dwa obiekty klasy Car reprezentują ten sam samochód?
      * Dodaj do kolekcji HashSet kilka obiektów klasy Car - również duplikaty i sprawdź czy w kolekcji nie ma duplikatów.
      */
-    private static void setOfCars(Car... cars) {
-        Set<Car> carSet = new HashSet<>();
-        carSet.addAll(Arrays.asList(cars));
-        System.out.println(carSet);
+    private static void setOfCars() {
+        Car car1 = new Car("VSSZZZ6JZ9R049735", "Polonez", 1990);
+        Car car2 = new Car("AF7ZZZ6JZ9R049541", "Skoda", 1999);
+        Car car3 = new Car("VSSZZZ6JZ9R049735", "Polonez", 1990);
 
+        Set<Car> cars = new HashSet<>();
+        cars.add(car1);
+        cars.add(car2);
+        cars.add(car3);
+
+        System.out.println("cars = " + cars);
     }
 
     /**
@@ -61,9 +64,9 @@ public class Tasks {
      * Dodaj do kolekcji obiekty przekazane w metodzie i zwróć kolekcję z metody.
      */
     private static NavigableSet<Citizen> treeSetOfCitizens(Citizen... citizens) {
-        NavigableSet<Citizen> citizenSet = new TreeSet<>();
-        citizenSet.addAll(Arrays.asList(citizens));
-        return citizenSet;
+        List<Citizen> citizenList = Arrays.asList(citizens);
+        TreeSet<Citizen> treeSet = new TreeSet<>(citizenList);
+        return treeSet;
     }
 
     /**
@@ -71,6 +74,8 @@ public class Tasks {
      *    Dla chętnych - dodaj testy sprawdzające tą metodę.
      */
     static Set<String> getNames(NavigableSet<String> citizens, char letterFrom, char letterTo) {
-        return null;
+        String from = String.valueOf(letterFrom);
+        String to = String.valueOf(++letterTo);
+        return citizens.subSet(from, true, to, true);
     }
 }

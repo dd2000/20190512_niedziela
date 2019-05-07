@@ -13,17 +13,16 @@ public class Tasks {
         Employee employee5 = new Employee("Mietek", "Babka", "BH776", 1900.55);
         Employee employee6 = new Employee("Jurek", "Bruzda", "JJ779", 1100);
         Employee employee7 = new Employee("Wiesław", "Bruzda", "WW770", 4100);
-        Employee employee8 = new Employee("Ania", "Bruzda", "JJ722", 1100);
         Map<String, Employee> employeeMap = mapOfEmployees(employee1, employee2, employee3, employee4, employee5, employee6, employee7);
-        //printMap("employeeMap:", employeeMap);
+        printMap("employeeMap:", employeeMap);
 
         //#2
-//        TreeMap<String, Employee> treeMapOfEmployees = treeMapOfEmployees(employeeMap);
-//        printMap("\ntreeMapOfEmployees:", treeMapOfEmployees);
+        //TreeMap<String, Employee> treeMapOfEmployees = treeMapOfEmployees(employeeMap);
+        //printMap("\ntreeMapOfEmployees:", treeMapOfEmployees);
 
         //#3
-        TreeMap<Double, List<Employee>> treeMapOfEmployeesSalary = treeMapOfEmployeesSalary(employee1, employee2, employee4, employee5, employee6, employee7, employee8);
-        printMap("\ntreeMapOfEmployeesSalary:", treeMapOfEmployeesSalary);
+        //TreeMap<Double, Employee> treeMapOfEmployeesSalary = treeMapOfEmployeesSalary(employee1, employee2, employee4, employee5, employee6, employee7);
+        //printMap("\ntreeMapOfEmployeesSalary:", treeMapOfEmployeesSalary);
 
         //#4
         //Map<String, Collection<Employee>> dividedBySalary = divideBySalary(treeMapOfEmployeesSalary);
@@ -37,9 +36,10 @@ public class Tasks {
     private static Map<String, Employee> mapOfEmployees(Employee... employees) {
         Map<String, Employee> employeeMap = new HashMap<>();
         for (Employee employee : employees) {
-            String name = employee.getSurname() + " " + employee.getName();
-            employeeMap.put(name, employee);
+            String key = employee.getSurname() + " " + employee.getName();
+            employeeMap.put(key, employee);
         }
+
         return employeeMap;
     }
 
@@ -49,12 +49,11 @@ public class Tasks {
      *    Zwróć cała posortowaną mapę z metody.
      */
     private static TreeMap<String, Employee> treeMapOfEmployees(Map<String, Employee> employeeMap) {
-        TreeMap<String, Employee> treeMap = new TreeMap<>((s1, s2) -> -s1.compareTo(s2));
+        TreeMap<String, Employee> treeMap = new TreeMap<>(Comparator.reverseOrder());
         treeMap.putAll(employeeMap);
 
-        printMap("Tylko A i B ",treeMap.subMap("C","A"));
-
-
+        SortedMap<String, Employee> subMap = treeMap.subMap("C", "A");
+        printMap("\nemployees (A-B):", subMap);
         return treeMap;
     }
 
@@ -64,21 +63,19 @@ public class Tasks {
      *    Wypisz pracownika z najniższymi i najwyższymi zarobkami - korzystając z metod mapy.
      *    Zwróc mapę z metody.
      */
-    private static TreeMap<Double, List<Employee>> treeMapOfEmployeesSalary(Employee... employees) {
-
-        TreeMap<Double, List<Employee>> employeeTreeMap = new TreeMap<>();
-
+    private static TreeMap<Double, Employee> treeMapOfEmployeesSalary(Employee... employees) {
+        TreeMap<Double, Employee> employeeMap = new TreeMap<>();
         for (Employee employee : employees) {
-            double salary = employee.getSalary();
-            if(!employeeTreeMap.containsKey(salary)) {
-                employeeTreeMap.put(salary, new ArrayList<>());
-            }
-            employeeTreeMap.get(salary).add(employee);
+            double key = employee.getSalary();
+            employeeMap.put(key, employee);
         }
-        System.out.println(employeeTreeMap.firstEntry().getValue());
-        System.out.println(employeeTreeMap.get(employeeTreeMap.lastKey()));
 
-        return employeeTreeMap;
+        Double lowestSalary = employeeMap.firstKey();
+        System.out.println("\nlowestSalary = " + employeeMap.get(lowestSalary));
+        Double highestSalary = employeeMap.lastKey();
+        System.out.println("highestSalary = " + employeeMap.get(highestSalary));
+
+        return employeeMap;
     }
 
     /**
@@ -90,14 +87,20 @@ public class Tasks {
      *     Zwrócona mapa jako klucze ma zawierać opis przedziału zarobków, a jako wartość kolekcję pracowników dla danego przedziału
      */
     private static Map<String, Collection<Employee>> divideBySalary(TreeMap<Double, Employee> treeMapOfEmployeesSalary) {
-        return null;
+        Map<String, Collection<Employee>> divided = new LinkedHashMap<>();
+        SortedMap<Double, Employee> subMap = treeMapOfEmployeesSalary.subMap(0., 2000.);
+        divided.put("less than 1000PLN", subMap.values());
+
+        subMap = treeMapOfEmployeesSalary.subMap(2000., 4000.);
+        divided.put("between 2000-4000PLN", subMap.values());
+
+        subMap = treeMapOfEmployeesSalary.tailMap(4000.);
+        divided.put("more than 4000PLN", subMap.values());
+
+        return divided;
     }
 
     private static void printMap(String message, Map<?, ?> employeeMap) {
-        if(employeeMap == null) {
-            System.out.println("map is null!");
-            return;
-        }
         System.out.println(message);
         employeeMap.forEach((key, value) -> System.out.println(key + " -> " + value));
     }

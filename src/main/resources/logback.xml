@@ -15,6 +15,16 @@
         </encoder>
     </appender>
 
+    <appender name="MINI_PROJECT_LOG" class="ch.qos.logback.core.FileAppender">
+        <file>C:\myspace\sda_workspace\mini_project.txt</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <encoder>
+            <pattern>%date %level %file %logger[%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
     </root>
@@ -23,5 +33,11 @@
 
     <logger name="pl.sda.logging.systemY" level="DEBUG" additivity="true">
         <appender-ref ref="FILE_Y"/>
+    </logger>
+
+    <!--4. (zadanie z loggera) Skonfiguruj logbacka tak żeby wypisywał na konsolę wszystkie logi -->
+    <logger name="pl.sda.mini_project" level="DEBUG">
+        <!--5. (zadanie z loggera) Dodaj w konfiguracji zapis do pliku - tylko logów z poziomem WARN i wyżej -->
+        <appender-ref ref="MINI_PROJECT_LOG" />
     </logger>
 </configuration>
